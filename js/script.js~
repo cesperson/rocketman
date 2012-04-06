@@ -8,9 +8,9 @@ $(function() {
         $middle = $('#middle'), 
         $front = $('#front'),
 	$rocketman = $('#rocketman'),
-	rocketPos = 175,
+	rocketPos = 100,
 	rocketCounter = 0,
-	rocketAngle = 0,
+	rocketAngle = 5,
         xPos = 0, // Initial x position of background images.
         $win = $(window); // Cache jQuery reference to window.
     
@@ -33,34 +33,34 @@ $(function() {
     // create the parallax effect.
     setInterval(function () {
         // Update the background position variable.
-        xPos += speed;
+        // xPos += speed;
+	xPos += 0.25;
 
 	if (rocketCounter == 150) {
 		rocketCounter = 0;
-	} else if (rocketCounter < 100) {
-		rocketPos += speed;
-		rocketAngle += speed;
+	} else if (rocketCounter < 75) {
+		rocketPos += 1;
+		rocketAngle += .3;
 		rocketCounter++;
 	} else {
-		rocketPos -= speed * 2;
-		rocketAngle -= speed * 10;
+		rocketPos -= 1;
+		rocketAngle -= .3;
 		rocketCounter++;
 	}
 
 	$rocketman.css('-webkit-transform', 'rotate(' + rocketAngle + 'deg)');
-
         
         // Apply it to the layers' background image positions,
         // scaled upf or the front two layers so they move quicker
         // than the farthest layer.
         $back.css({
-            backgroundPosition: (xPos * 1) * 10 + 'px 0px'
+            backgroundPosition: -(xPos * 1) * 3 + 'px 0px'
         });
         $middle.css({
-            backgroundPosition: (xPos * 2) * 10 + 'px 0px'
+            backgroundPosition: -(xPos * 2) * 10 + 'px 0px'
         });
         $front.css({
-            backgroundPosition: (xPos * 3) * 10 + 'px 0px'
+            backgroundPosition: -(xPos * 3) * 10 + 'px 0px'
         });
         $rocketman.css({
 	    top: rocketPos + 'px'
